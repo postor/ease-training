@@ -2,16 +2,31 @@
   "name": "webapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "bookshelf": "^1.0.1",
+    "date-fns": "^2.8.1",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "knex": "^0.20.2",
+    "mysql-restful-api": "^1.0.15",
     "next": "^9.1.4",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-hook-shared-state": "^0.0.2",
+    "restful-model": "^0.1.8",
+    "socket.io": "^2.3.0",
+    "socket.io-stream": "^0.9.1",
+    "sweetalert2": "^9.3.17"
   }
 }
