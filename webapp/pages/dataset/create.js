@@ -59,6 +59,7 @@ export default () => {
               text: 'creating dataset...',
               showConfirmButton: false
             })
+            console.log(file.name,'file.name',file)
             const dataset = await model.create({
               name: file.name,
               created_at: getUnixTime(new Date())
@@ -71,7 +72,7 @@ export default () => {
               showConfirmButton: false
             })
 
-            const models = await modelModel.query({})
+            const models = await modelModel.read()
             for (let i = 0; i < models.length; i++) {
               await trainModel.create({
                 dataset_id: dataset.id,

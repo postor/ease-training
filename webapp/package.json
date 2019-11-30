@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
+    "axios-rest-resource": "^0.4.0",
     "body-parser": "^1.19.0",
     "bookshelf": "^1.0.1",
     "date-fns": "^2.8.1",
@@ -21,10 +23,11 @@
     "knex": "^0.20.2",
     "mysql-restful-api": "^1.0.15",
     "next": "^9.1.4",
+    "next.js-redux-helper": "^1.0.6",
+    "object-path-immutable": "^4.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hook-shared-state": "^0.0.2",
-    "restful-model": "^0.1.8",
+    "react-redux": "^7.1.3",
     "socket.io": "^2.3.0",
     "socket.io-stream": "^0.9.1",
     "sweetalert2": "^9.3.17"
