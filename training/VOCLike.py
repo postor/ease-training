@@ -1,27 +1,11 @@
 from gluoncv.data import VOCDetection
+from classes import classesNames
 
 
-class VOCLike(VOCDetection):    
-    NUM_CLASS = 18
+class VOCLike(VOCDetection):
+    NUM_CLASS = len(classesNames)
     BASE_DIR = '.'
     @property
     def classes(self):
         """Category names."""
-        return ('jyz',
-                'sflxccz',
-                'fxjgb',
-                'fzc',
-                'xcxj',
-                'xdzc',
-                'szxjgb',
-                'fhjyz',
-                'jyh',
-                'sflzc',
-                'sflnzcz',
-                'dpjjyh',
-                'bsp',
-                'bxgqnq',
-                'djlsbhm',
-                'sjlb',
-                'gjxqnc',
-                'sxtzb')
+        return tuple(classesNames)
