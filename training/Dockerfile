@@ -1,4 +1,4 @@
-FROM mxnet/python:gpu
+FROM mxnet/python:latest_gpu_mkl_py3
 
 RUN set -x && \
   pip3 install gluoncv && \
