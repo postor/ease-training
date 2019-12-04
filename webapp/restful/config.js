@@ -1,12 +1,12 @@
-{
+module.exports = {
   "db": {
     "client": "mysql",
     "connection": {
-      "host": "localhost",
+      "host": process.env.MYSQL_HOST || "localhost",
       "port": "3306",
       "user": "root",
-      "password": "",
-      "database": "ease_training",
+      "password": process.env.MYSQL_ROOT_PASSWORD || "",
+      "database": process.env.MYSQL_DATABASE ||"ease_training",
       "charset": "utf8",
       "supportBigNumbers": true,
       "bigNumberStrings": true
@@ -17,6 +17,5 @@
     "epoch",
     "model",
     "train"
-  ],
-  "generatePath": "D:\\study\\ease-training\\webapp\\restful"
+  ]
 }

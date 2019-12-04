@@ -1,10 +1,10 @@
 import { ResourceBuilder } from 'axios-rest-resource'
 
-const HOSTURI = process.env.HOSTURI || 'http://localhost:3000'
+const RESTFUL_ENDPOINT = process.env.RESTFUL_ENDPOINT || 'http://localhost:3000/restful'
 const relativePath = '/restful'
 
 const baseURL = typeof window === 'undefined'
-  ? HOSTURI + relativePath
+  ? RESTFUL_ENDPOINT
   : relativePath;
 
 const resourceBuilder = new ResourceBuilder({

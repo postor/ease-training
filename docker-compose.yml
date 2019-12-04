@@ -4,12 +4,18 @@ services:
     build:
       context: ./webapp
       dockerfile: Dockerfile
-      
-  db:
-    build:
-      context: ./mysql
-      dockerfile: Dockerfile
-    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+
+  mysql:
+    image: mysql
+    volumes:
+      - ./mysql/schema.sql:/docker-entrypoint-initdb.d
     restart: always
     env_file:
       - .env

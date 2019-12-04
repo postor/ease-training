@@ -22,6 +22,9 @@ from gluoncv.utils.metrics.coco_detection import COCODetectionMetric
 from gluoncv.utils import LRScheduler, LRSequential
 from VOCLike import VOCLike
 
+from classes import classesNames
+from restful import update_start, update_epoch, update_working
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -325,6 +328,7 @@ def train(net, train_data, val_data, eval_metric, ctx, args):
                                  for k, v in zip(map_name, mean_ap)])
             logger.info('[Epoch {}] Validation: \n{}'.format(epoch, val_msg))
             current_map = float(mean_ap[-1])
+            update_epoch(epoch, 0.0, current_map)
         else:
             current_map = 0.
         save_params(net, best_map, current_map, epoch,
@@ -332,26 +336,8 @@ def train(net, train_data, val_data, eval_metric, ctx, args):
 
 
 if __name__ == '__main__':
+    update_start()
     args = parse_args()
-    custom_classes = ['jyz',
-                      'sflxccz',
-                      'fxjgb',
-                      'fzc',
-                      'xcxj',
-                      'xdzc',
-                      'szxjgb',
-                      'fhjyz',
-                      'jyh',
-                      'sflzc',
-                      'sflnzcz',
-                      'dpjjyh',
-                      'bsp',
-                      'bxgqnq',
-                      'djlsbhm',
-                      'sjlb',
-                      'gjxqnc',
-                      'djslbhm',
-                      'sxtzb']
 
     # fix seed for mxnet, numpy and python builtin random generator.
     gutils.random.seed(args.seed)
@@ -365,7 +351,7 @@ if __name__ == '__main__':
     args.save_prefix += net_name
     # use sync bn if specified
     net = get_model(net_name, pretrained_base=True,
-                    classes=custom_classes)
+                    classes=classesNames)
     async_net = net
 
     if args.resume.strip():
@@ -384,3 +370,4 @@ if __name__ == '__main__':
 
     # training
     train(net, train_data, val_data, eval_metric, ctx, args)
+    update_working(2)

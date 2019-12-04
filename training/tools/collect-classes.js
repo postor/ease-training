@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs-extra')
+const fs = require('fs')
 const { join } = require('path')
 const { parseString } = require('xml2js')
 const Counter = require('./Counter')
