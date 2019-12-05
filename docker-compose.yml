@@ -6,11 +6,18 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./shared-files:/shared-files
     restart: always
     ports:
       - 3000:3000
     env_file:
-      - .env
+      - local.env
+    depends_on:
+      - mysql
+  traningrunner:
+    build:
+      context: ./training/tools
+      dockerfile: Dockerfile
 
   mysql:
     image: mysql
@@ -18,10 +25,12 @@ services:
       - ./mysql/schema.sql:/docker-entrypoint-initdb.d
     restart: always
     env_file:
-      - .env
+      - local.env
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    depends_on:
+      - mysql

@@ -16,6 +16,8 @@ const getModel = (tableName) => resourceBuilder.build(`/${tableName}`)
 
 const Train = getModel('train')
 const Model = getModel('model')
+const Dataset = getModel('dataset')
+
   ;
 (async () => {
   let todoList = await getJob(0)
@@ -30,15 +32,16 @@ const Model = getModel('model')
   await Train.update({ data: train, params: { id: train.id } })
   console.log(`Job updated, ${JSON.stringify(train)}`)
   const model = await Model.readOne({ params: { id: train.model_id } })
+  const dataset = await Dataset.readOne({ params: { id: train.dataset_id } })
   const envs = {
     TRAIN_ID: train.id,
     RESTFUL_ENDPOINT: process.env.RESTFUL_ENDPOINT
   }
   const volumes = {
-    '':''
+    [process.env.SHARED_FILES]:'/shared-files'
   }
 
-  fs.writeFileSync(join(__dirname, '..', 'tmp.sh'),
+  fs.writeFileSync(join(__dirname, 'tmp.sh'),
     `set -x && docker run --rm --gpus all `)
 
 })()

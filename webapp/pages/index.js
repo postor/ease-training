@@ -1,7 +1,7 @@
 
 import DatasetList from '../components/DatasetList'
 import { update } from '../store/dataset'
-import wrapper from '../store'
+import wrapper from '../components/layout'
 const Index = () => {
   return (<div>
     <h1>ease training</h1>

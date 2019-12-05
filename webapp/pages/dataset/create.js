@@ -2,20 +2,20 @@ import { useRef, useState } from 'react'
 import Router from 'next/router'
 import swal from 'sweetalert2'
 import getUnixTime from 'date-fns/getUnixTime'
-import DefaultLayout from '../../components/DefaultLayout'
-import { update, model } from '../../components/states/datasets'
-import getModel from '../../components/get-model'
+import getModel from '../../store/get-model'
+import wrapper from '../../components/layout'
+import { update } from '../../store/dataset'
 const modelModel = getModel('model')
 const trainModel = getModel('train')
 
 
-export default () => {
+const Create = ({dispatch}) => {
   const fileInput = useRef()
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [fileSize, setFileSize] = useState(0)
 
-  return (<DefaultLayout>
+  return (<div>
     <h1>create dataset</h1>
     <p>upload your voc like format dataset zip here, structure like:</p>
     <pre>
@@ -60,11 +60,11 @@ export default () => {
               showConfirmButton: false
             })
             console.log(file.name,'file.name',file)
-            const dataset = await model.create({
+            const dataset = await modelModel.create({
               name: file.name,
               created_at: getUnixTime(new Date())
             })
-            await update()
+            await dispatch(update())
             swal.close()
             swal.fire({
               title: '',
@@ -89,5 +89,7 @@ export default () => {
         }}
       >upload dataset</button>)}
     </div>
-  </DefaultLayout>)
+  </div>)
 }
+
+export default wrapper(Create)

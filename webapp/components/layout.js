@@ -22,9 +22,7 @@ const layout = (Page) => wrapper(class Layout extends React.Component {
   }
 
   static getInitialProps = async (ctx) => {
-    return await Promise.all([
-      Page.getInitialProps ? Page.getInitialProps(ctx) : Promise.resolve(true),
-    ])
+    return await Page.getInitialProps ? Page.getInitialProps(ctx) : Promise.resolve(true)
   }
 })
 

@@ -1,3 +1,4 @@
 /webapp/node_modules
 /webapp/yarn.lock
 /webapp/.next
+/local.env
