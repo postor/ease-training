@@ -9,7 +9,7 @@ RUN set -x && \
   apt update -y && \
   apt install unzip curl git -y && \
   curl https://deb.nodesource.com/setup_12.x | bash -s -- && \
-  sudo apt-get install -y nodejs && \
+  apt install -y nodejs && \
   cd tools && \
   npm install
 
