@@ -11,6 +11,6 @@ RUN set -x && \
   curl https://deb.nodesource.com/setup_12.x | bash -s -- && \
   ls && pwd && \
   cd tools && \
-  npm install
+  yarn
 
 ENTRYPOINT ./train.sh

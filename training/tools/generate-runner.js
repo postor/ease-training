@@ -20,7 +20,7 @@ const Dataset = getModel('dataset')
 
   ;
 (async () => {
-  let todoList = await getJob(0)
+  let todoList = await getJob(WORKING_STATE_NOT_STARTED)
   while (!todoList.length) {
     console.log(`No job to do, wait for ${IDLE_WAITING} miliseconds ...`)
     await waitMiliseconds(IDLE_WAITING)
@@ -33,23 +33,15 @@ const Dataset = getModel('dataset')
   console.log(`Job updated, ${JSON.stringify(train)}`)
   const model = await Model.readOne({ params: { id: train.model_id } })
   const dataset = await Dataset.readOne({ params: { id: train.dataset_id } })
-  const envs = {
-    TRAIN_ID: train.id,
-    RESTFUL_ENDPOINT: process.env.RESTFUL_ENDPOINT,
-
-  }
-  const volumes = {
-    [process.env.SHARED_FILES]: '/shared-files',
-    [process.env.SHARED_FILES + '/datasets/' + dataset.name]: '/dataset.zip'
-  }
 
   const params = [
     '--rm',
     '--gpus all',
+    `--env TRAIN_ID=${train.id}`,
+    `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
+    `-v ${process.env.SHARED_FILES}:/shared-files`,
+    `-v ${process.env.SHARED_FILES + '/datasets/' + dataset.name}:/dataset.zip`,
   ]
-
-
-
 
   fs.writeFileSync(join(__dirname, 'tmp.sh'),
     `set -x && docker run ${params.join(' ')} postor/ease-training ${model.docker_cmd}`)
