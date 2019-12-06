@@ -31,8 +31,8 @@ const Dataset = getModel('dataset')
   train.working = WORKING_STATE_WORKING
   await Train.update({ data: train, params: { id: train.id } })
   console.log(`Job updated, ${JSON.stringify(train)}`)
-  const model = await Model.readOne({ params: { id: train.model_id } })
-  const dataset = await Dataset.readOne({ params: { id: train.dataset_id } })
+  const model =  (await Model.readOne({ params: { id: train.model_id } })).data
+  const dataset = (await Dataset.readOne({ params: { id: train.dataset_id } })).data
 
   const params = [
     '--rm',
@@ -49,14 +49,12 @@ const Dataset = getModel('dataset')
 })()
 
 async function getJob(workingState) {
-  const workingList = Train.read({
+  return (await Train.read({
     params: {
       limit: 1,
       working: workingState
     }
-  }).data || []
-
-  return workingList
+  })).data || []
 }
 
 function waitMiliseconds(miliseconds) {

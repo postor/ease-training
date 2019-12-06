@@ -61,13 +61,13 @@ const Create = ({ dispatch }) => {
               showConfirmButton: false
             })
             console.log(file.name, 'file.name', file)
-            const dataset = await datasetModel.create({
+            const dataset = (await datasetModel.create({
               data: {
                 name: file.name,
                 created_at: getUnixTime(new Date())
               }
-            })
-            await dispatch(update())
+            })).data
+            await dispatch(update(true))
             swal.close()
             swal.fire({
               title: '',
@@ -75,7 +75,8 @@ const Create = ({ dispatch }) => {
               showConfirmButton: false
             })
 
-            const models = await modelModel.read()
+            const models = (await modelModel.read()).data
+            console.log(models,'models')
             for (let i = 0; i < models.length; i++) {
               await trainModel.create({
                 data: {

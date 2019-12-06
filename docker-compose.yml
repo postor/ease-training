@@ -14,7 +14,7 @@ services:
       - local.env
     depends_on:
       - mysql
-      
+
   traningrunner:
     build:
       context: ./training/tools
@@ -24,6 +24,7 @@ services:
     image: mysql
     volumes:
       - ./mysql/schema.sql:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
     restart: always
     env_file:
       - local.env
@@ -35,3 +36,5 @@ services:
       - 8080:8080
     depends_on:
       - mysql
+volumes:
+  mysql:
