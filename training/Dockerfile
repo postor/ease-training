@@ -9,6 +9,8 @@ RUN set -x && \
   apt update -y && \
   apt install unzip curl git -y && \
   curl https://deb.nodesource.com/setup_12.x | bash -s -- && \
-  cd tools && npm install && cd ..
+  ls && pwd && \
+  cd tools && \
+  npm install
 
-ENTRYPOINT /training/train.sh
+ENTRYPOINT ./train.sh

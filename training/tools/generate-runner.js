@@ -35,14 +35,24 @@ const Dataset = getModel('dataset')
   const dataset = await Dataset.readOne({ params: { id: train.dataset_id } })
   const envs = {
     TRAIN_ID: train.id,
-    RESTFUL_ENDPOINT: process.env.RESTFUL_ENDPOINT
+    RESTFUL_ENDPOINT: process.env.RESTFUL_ENDPOINT,
+
   }
   const volumes = {
-    [process.env.SHARED_FILES]:'/shared-files'
+    [process.env.SHARED_FILES]: '/shared-files',
+    [process.env.SHARED_FILES + '/datasets/' + dataset.name]: '/dataset.zip'
   }
 
+  const params = [
+    '--rm',
+    '--gpus all',
+  ]
+
+
+
+
   fs.writeFileSync(join(__dirname, 'tmp.sh'),
-    `set -x && docker run --rm --gpus all `)
+    `set -x && docker run ${params.join(' ')} postor/ease-training ${model.docker_cmd}`)
 
 })()
 

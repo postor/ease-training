@@ -5,11 +5,12 @@ import getUnixTime from 'date-fns/getUnixTime'
 import getModel from '../../store/get-model'
 import wrapper from '../../components/layout'
 import { update } from '../../store/dataset'
+const datasetModel = getModel('dataset')
 const modelModel = getModel('model')
 const trainModel = getModel('train')
 
 
-const Create = ({dispatch}) => {
+const Create = ({ dispatch }) => {
   const fileInput = useRef()
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -59,10 +60,12 @@ const Create = ({dispatch}) => {
               text: 'creating dataset...',
               showConfirmButton: false
             })
-            console.log(file.name,'file.name',file)
-            const dataset = await modelModel.create({
-              name: file.name,
-              created_at: getUnixTime(new Date())
+            console.log(file.name, 'file.name', file)
+            const dataset = await datasetModel.create({
+              data: {
+                name: file.name,
+                created_at: getUnixTime(new Date())
+              }
             })
             await dispatch(update())
             swal.close()
@@ -75,9 +78,11 @@ const Create = ({dispatch}) => {
             const models = await modelModel.read()
             for (let i = 0; i < models.length; i++) {
               await trainModel.create({
-                dataset_id: dataset.id,
-                model_id: models[i].id,
-                created_at: getUnixTime(new Date())
+                data: {
+                  dataset_id: dataset.id,
+                  model_id: models[i].id,
+                  created_at: getUnixTime(new Date())
+                }
               })
             }
             swal.close()

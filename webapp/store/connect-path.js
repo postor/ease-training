@@ -1,16 +1,7 @@
 import { connect } from 'react-redux'
-
+import getPath from './get-path'
 export default pathObj => Comp => connect(state => getProps(state, pathObj))(Comp)
 
-function getPath(obj, path) {
-  if (path === '') return obj
-  let arr = path.split('.'), t = obj
-  for (let i = 0; i < arr.length; i++) {
-    t = t[arr[i]]
-    if (t === undefined) return t
-  }
-  return t
-}
 
 function getProps(state, pathObj) {
   let props = {}

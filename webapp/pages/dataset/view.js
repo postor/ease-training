@@ -1,8 +1,9 @@
 import layout from '../../components/layout'
+import connect from '../../store/connect-path'
+import { update, PREFIX } from '../../store/dataset'
 
-const View = ({ query: { id } }) => {
-  const datasets = []
-  if(!datasets.length) return (<div>not found</div>)
+const View = ({ id, datasets = [] }) => {
+  if (!datasets.length) return (<div>not found</div>)
   console.log(datasets, 'datasets')
   const dataset = datasets.filter(x => x.id == id)[0]
   if (!dataset) {
@@ -17,9 +18,13 @@ const View = ({ query: { id } }) => {
   </div>)
 }
 
+const ConnectedView = connect({ datasets: PREFIX })(View)
 
-View.getInitialProps = ({ query }) => {
+const WrappedView = ({ query: { id } }) => (<ConnectedView id={id} />)
+
+WrappedView.getInitialProps = async ({ query, store }) => {
+  await store.dispatch(update(false))
   return { query }
 }
 
-export default layout(View)
+export default layout(WrappedView)
