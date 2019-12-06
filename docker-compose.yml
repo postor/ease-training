@@ -14,6 +14,7 @@ services:
       - local.env
     depends_on:
       - mysql
+      
   traningrunner:
     build:
       context: ./training/tools
