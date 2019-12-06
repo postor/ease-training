@@ -42,9 +42,9 @@ const Dataset = getModel('dataset')
     `-v ${process.env.SHARED_FILES}:/shared-files`,
     `-v ${process.env.SHARED_FILES + '/datasets/' + dataset.name}:/dataset.zip`,
   ]
-
+  const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
   fs.writeFileSync(join(__dirname, 'tmp.sh'),
-    `set -x && docker run ${params.join(' ')} postor/ease-training ${model.docker_cmd}`)
+    `set -x && docker run ${params.join(' ')} postor/ease-training ${cmd}`)
 
 })()
 
