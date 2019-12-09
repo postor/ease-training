@@ -1,16 +1,16 @@
-FROM mxnet/python:latest_gpu_mkl_py3
+FROM nvidia/cuda:10.2-base
 
 WORKDIR /training
 
 ADD . .
 
-RUN set -x && \
-  pip3 install gluoncv && \
-  apt update -y && \
-  apt install unzip curl git -y && \
-  curl https://deb.nodesource.com/setup_12.x | bash -s -- && \
-  apt install -y nodejs && \
-  cd tools && \
-  npm install
+RUN set -x \
+  && apt update -y \
+  && apt install python3 python3-pip unzip curl git -y \
+  && pip3 install mxnet-cu102 gluoncv numpy \
+  && curl https://deb.nodesource.com/setup_12.x | bash -s -- \
+  && apt install -y nodejs \
+  && cd tools \
+  && npm install
 
 ENTRYPOINT ./train.sh
