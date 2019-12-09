@@ -9,7 +9,8 @@ module.exports = {
       "database": process.env.MYSQL_DATABASE ||"ease_training",
       "charset": "utf8",
       "supportBigNumbers": true,
-      "bigNumberStrings": true
+      "bigNumberStrings": true,
+      insecureAuth : true
     }
   },
   "tables": [
