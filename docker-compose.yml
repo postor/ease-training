@@ -5,7 +5,6 @@ services:
       context: ./webapp
       dockerfile: Dockerfile
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - ./shared-files:/shared-files
     restart: always
     ports:
@@ -19,6 +18,8 @@ services:
     build:
       context: ./training/tools
       dockerfile: Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - local.env
     restart: always
