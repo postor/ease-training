@@ -55,7 +55,7 @@ const Dataset = getModel('dataset')
 async function getJob(workingState) {
   return (await Train.read({
     params: {
-      limit: 1,
+      _perPage: 1,
       working: workingState
     }
   })).data || []
