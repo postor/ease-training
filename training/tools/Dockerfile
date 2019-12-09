@@ -4,8 +4,10 @@ ARG DOCKER_CLI_VERSION="docker-19.03.5"
 ENV DOWNLOAD_URL="https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz"
 
 # install docker client
-RUN apk --update add curl \
+RUN set -x \
+  && apk --update add curl \
   && mkdir -p /tmp/download \
+  && echo $DOWNLOAD_URL \
   && curl -L $DOWNLOAD_URL | tar -xz -C /tmp/download \
   && mv /tmp/download/docker/docker /usr/local/bin/ \
   && rm -rf /tmp/download \
