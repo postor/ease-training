@@ -1,4 +1,4 @@
 #!/bin/bash
-set +x && \
-./prepare.sh && \
-python3 "$@"
+set +x \
+  && ./prepare.sh \
+  && python3 "$@"
