@@ -64,6 +64,7 @@ const Create = ({ dispatch }) => {
             const dataset = (await datasetModel.create({
               data: {
                 name: file.name,
+                voczip_path: file.name,
                 created_at: getUnixTime(new Date())
               }
             })).data
@@ -76,7 +77,7 @@ const Create = ({ dispatch }) => {
             })
 
             const models = (await modelModel.read()).data
-            console.log(models,'models')
+            console.log(models, 'models')
             for (let i = 0; i < models.length; i++) {
               await trainModel.create({
                 data: {
