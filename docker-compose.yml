@@ -29,6 +29,8 @@ services:
     volumes:
       - ./mysql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
     restart: always
     env_file:
       - local.env
