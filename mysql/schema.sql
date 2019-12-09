@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2019-12-04 03:53:47
+-- Generation Time: 2019-12-09 07:37:51
 -- 服务器版本： 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -45,11 +45,11 @@ CREATE TABLE `dataset` (
 
 CREATE TABLE `epoch` (
   `id` int(11) NOT NULL COMMENT '编号',
-  `job_id` int(11) NOT NULL,
-  `epoch_num` int(11) NOT NULL COMMENT 'epoch编号',
-  `loss` float NOT NULL COMMENT 'loss',
-  `m_ap` float NOT NULL COMMENT 'meanAP',
-  `created_at` int(11) NOT NULL COMMENT '创建时间戳'
+  `job_id` int(11) NOT NULL DEFAULT '0',
+  `epoch_num` int(11) NOT NULL DEFAULT '0' COMMENT 'epoch编号',
+  `loss` float NOT NULL DEFAULT '0' COMMENT 'loss',
+  `m_ap` float NOT NULL DEFAULT '0' COMMENT 'meanAP',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间戳'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,10 +83,10 @@ CREATE TABLE `train` (
   `id` int(11) NOT NULL COMMENT '编号',
   `dataset_id` int(11) NOT NULL,
   `model_id` int(11) NOT NULL,
-  `working` int(1) NOT NULL COMMENT '工作状态，0=未开始，1=进行中，2=已完成，-1=出错',
-  `created_at` int(11) NOT NULL COMMENT '创建时间戳',
-  `started_at` int(11) NOT NULL COMMENT '启动时间',
-  `ended_at` int(11) NOT NULL COMMENT '完成时间'
+  `working` int(1) NOT NULL DEFAULT '0' COMMENT '工作状态，0=未开始，1=进行中，2=已完成，-1=出错',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间戳',
+  `started_at` int(11) NOT NULL DEFAULT '0' COMMENT '启动时间',
+  `ended_at` int(11) NOT NULL DEFAULT '0' COMMENT '完成时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -137,7 +137,7 @@ ALTER TABLE `epoch`
 -- 使用表AUTO_INCREMENT `model`
 --
 ALTER TABLE `model`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号', AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号', AUTO_INCREMENT=4;
 
 --
 -- 使用表AUTO_INCREMENT `train`
