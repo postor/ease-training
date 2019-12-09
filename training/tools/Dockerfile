@@ -1,6 +1,6 @@
 FROM node:10-alpine
 
-ARG DOCKER_CLI_VERSION="docker-19.03.5"
+ARG DOCKER_CLI_VERSION="19.03.5"
 ENV DOWNLOAD_URL="https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz"
 
 # install docker client
