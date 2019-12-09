@@ -19,6 +19,8 @@ services:
     build:
       context: ./training/tools
       dockerfile: Dockerfile
+    env_file:
+      - local.env
 
   mysql:
     image: mysql
@@ -36,6 +38,6 @@ services:
       - 8080:8080
     depends_on:
       - mysql
-      
+
 volumes:
   mysql:
