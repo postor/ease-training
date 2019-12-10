@@ -9,11 +9,12 @@ RUN set -x \
   && curl https://deb.nodesource.com/setup_12.x | bash -s -- \
   && apt install -y nodejs 
 
-
-ADD . .
+COPY ./tools/package*.json ./tools/
 
 RUN set -x \
   && cd tools \
   && npm install
+
+COPY . .
 
 ENTRYPOINT ./train.sh

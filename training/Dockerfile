@@ -10,9 +10,12 @@ RUN set -x \
   && apt install -y nodejs 
 
 
-ADD . .
+COPY ./tools/package*.json ./tools/
+
 RUN set -x \
   && cd tools \
   && npm install
+
+COPY . .
 
 ENTRYPOINT ./train.sh

@@ -40,8 +40,9 @@ const Dataset = getModel('dataset')
       '--gpus all',
       `--env TRAIN_ID=${train.id}`,
       `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
+      `-v ~/.mxnet:~/.mxnet`,
       `-v ${process.env.SHARED_FILES}:/shared-files`,
-      `-v ${process.env.SHARED_FILES + '/datasets/' + dataset.name}:/dataset.zip`,
+      `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
     ]
     const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
