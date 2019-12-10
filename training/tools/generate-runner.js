@@ -51,10 +51,12 @@ const Dataset = getModel('dataset')
     const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
 
     fs.writeFileSync(currentFile,
-      `set -x && ./prepare.sh && python3 ${cmd}`)
+      `#!/bin/bash
+      set -x && ./prepare.sh && python3 ${cmd}`)
     fs.chmodSync(currentFile, 0o765)
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
-      `set -x && docker run ${params.join(' ')} ${process.env.RUNNER_IMAGE}`)
+      `#!/bin/bash
+      set -x && docker run ${params.join(' ')} ${process.env.RUNNER_IMAGE}`)
   } catch (e) {
     console.log(e)
     process.exit(2)
