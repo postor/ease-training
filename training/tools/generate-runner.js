@@ -49,7 +49,7 @@ const Dataset = getModel('dataset')
       `--entrypoint ${currentFile}`,
       `--network=ease-training`
     ]
-    const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
+    const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}/`
 
     fs.writeFileSync(currentFile,
       `#!/bin/bash
