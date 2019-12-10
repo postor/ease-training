@@ -492,7 +492,7 @@ if __name__ == '__main__':
             kwargs['num_devices'] = len(args.gpus.split(','))
     net_name = '_'.join(('faster_rcnn', *module_list, args.network, args.dataset))
     args.save_prefix += net_name
-    net = get_model(net_name, pretrained_base=True,
+    net = get_model(net_name, pretrained_base=True, classes=classesNames,
                     per_device_batch_size=args.batch_size // len(ctx), **kwargs)
     if args.resume.strip():
         net.load_parameters(args.resume.strip())

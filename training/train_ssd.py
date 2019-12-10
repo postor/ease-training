@@ -398,7 +398,7 @@ if __name__ == '__main__':
                         norm_kwargs={'num_devices': len(ctx)})
         async_net = get_model(net_name, pretrained_base=False)  # used by cpu worker
     else:
-        net = get_model(net_name, pretrained_base=True, norm_layer=gluon.nn.BatchNorm)
+        net = get_model(net_name, pretrained_base=True, classes=classesNames, norm_layer=gluon.nn.BatchNorm)
         async_net = net
     if args.resume.strip():
         net.load_parameters(args.resume.strip())

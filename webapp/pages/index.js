@@ -9,8 +9,6 @@ const Index = () => {
 
     <h2>datasets</h2>
     <DatasetList />
-
-    <h2>models</h2>
   </div>)
 }
 
