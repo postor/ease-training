@@ -40,7 +40,7 @@ const Dataset = getModel('dataset')
       '--gpus all',
       `--env TRAIN_ID=${train.id}`,
       `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
-      `-v ~/.mxnet:~/.mxnet`,
+      `-v ${process.env.SHARED_FILES}/.mxnet:/.mxnet`,
       `-v ${process.env.SHARED_FILES}:/shared-files`,
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
     ]

@@ -1,14 +1,13 @@
-FROM nvidia/cuda:10.1-devel
+FROM mxnet/python:nightly_gpu_cu101_py3
 
 WORKDIR /training
 
 RUN set -x \
   && apt update -y \
-  && apt install python3 python3-pip unzip curl git -y \
-  && pip3 install mxnet-cu101 gluoncv numpy \
+  && apt install unzip curl git -y \
+  && pip3 install gluoncv numpy --no-cache-dir \
   && curl https://deb.nodesource.com/setup_12.x | bash -s -- \
   && apt install -y nodejs 
-
 
 COPY ./tools/package*.json ./tools/
 
