@@ -46,7 +46,8 @@ const Dataset = getModel('dataset')
       `-v ${process.env.SHARED_FILES}:/shared-files`,
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
       `--shm-size ${process.env.SHM_SIZE}G`,
-      `--entrypoint ${currentFile}`
+      `--entrypoint ${currentFile}`,
+      `--network=ease-training`
     ]
     const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
 
