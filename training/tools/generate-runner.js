@@ -35,9 +35,10 @@ const Dataset = getModel('dataset')
     const model = (await Model.readOne({ params: { id: train.model_id } })).data
     const dataset = (await Dataset.readOne({ params: { id: train.dataset_id } })).data
 
+    const currentFile = `/shared-files/current_${train.id}.sh`
+
     const params = [
       '--rm',
-      `-i`,
       '--gpus all',
       `--env TRAIN_ID=${train.id}`,
       `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
@@ -45,10 +46,15 @@ const Dataset = getModel('dataset')
       `-v ${process.env.SHARED_FILES}:/shared-files`,
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
       `--shm-size ${process.env.SHM_SIZE}G`,
+      `--entrypoint ${currentFile}`
     ]
     const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}`
+
+    fs.writeFileSync(currentFile,
+      `set -x && ./prepare.sh && python3 ${cmd}`)
+
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
-      `set -x && docker run ${params.join(' ')} ${process.env.RUNNER_IMAGE} ${cmd}`)
+      `set -x && docker run ${params.join(' ')} ${process.env.RUNNER_IMAGE}`)
   } catch (e) {
     console.log(e)
     process.exit(2)
