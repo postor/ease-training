@@ -52,7 +52,7 @@ const Dataset = getModel('dataset')
 
     fs.writeFileSync(currentFile,
       `set -x && ./prepare.sh && python3 ${cmd}`)
-
+    fs.chmodSync(currentFile, 0o765)
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
       `set -x && docker run ${params.join(' ')} ${process.env.RUNNER_IMAGE}`)
   } catch (e) {
