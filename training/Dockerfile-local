@@ -7,3 +7,5 @@ RUN set -x \
   && npm install
 
 COPY . .
+
+ENTRYPOINT python3
