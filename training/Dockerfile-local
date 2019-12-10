@@ -1,0 +1,9 @@
+FROM postor/ease-training
+
+COPY ./tools/package*.json ./tools/
+
+RUN set -x \
+  && cd tools \
+  && npm install
+
+COPY . .
