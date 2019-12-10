@@ -7,15 +7,15 @@ TRAIN_ID = int(os.getenv('TRAIN_ID'))
 
 
 def update_working(working_status):
-    cmd = 'curl -d \'{"id":%d, "working":%d}\' -H "Content-Type: application/json" -X PUT %s/train' % (
-        TRAIN_ID, working_status, RESTFUL_ENDPOINT)
+    cmd = 'curl -d \'{"working":%d}\' -H "Content-Type: application/json" -X PUT %s/train/%d' % (
+        working_status, RESTFUL_ENDPOINT, TRAIN_ID)
     print(cmd)
     os.system(cmd)
 
 
 def update_start():
-    cmd = 'curl -d \'{"id":%d, "started_at":%d}\' -H "Content-Type: application/json" -X PUT %s/train' % (
-        TRAIN_ID, int(time.time()), RESTFUL_ENDPOINT)
+    cmd = 'curl -d \'{"started_at":%d}\' -H "Content-Type: application/json" -X PUT %s/train/%d' % (
+        int(time.time()), RESTFUL_ENDPOINT, TRAIN_ID)
     print(cmd)
     os.system(cmd)
 
