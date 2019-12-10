@@ -35,6 +35,14 @@ try:
 except ImportError:
     dali_found = False
 
+
+
+from VOCLike import VOCLike
+
+from classes import classesNames
+from restful import update_start, update_epoch, update_working
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Train SSD networks.')
     parser.add_argument('--network', type=str, default='vgg16_atrous',
@@ -43,7 +51,7 @@ def parse_args():
                         help="Input data shape, use 300, 512.")
     parser.add_argument('--batch-size', type=int, default=32,
                         help='Training mini-batch size')
-    parser.add_argument('--dataset', type=str, default='voc',
+    parser.add_argument('--dataset', type=str, default='custom',
                         help='Training dataset. Now support voc.')
     parser.add_argument('--dataset-root', type=str, default='~/.mxnet/datasets/',
                         help='Path of the directory where the dataset is located.')
@@ -98,7 +106,12 @@ def parse_args():
     return args
 
 def get_dataset(dataset, args):
-    if dataset.lower() == 'voc':
+    if dataset.lower() == 'custom':
+        train_dataset = VOCLike(root='.', splits=(('Like', 'train'),))
+        val_dataset = VOCLike(root='.', splits=(('Like', 'val'),))
+        val_metric = VOC07MApMetric(
+            iou_thresh=0.5, class_names=val_dataset.classes)
+    elif dataset.lower() == 'voc':
         train_dataset = gdata.VOCDetection(
             splits=[(2007, 'trainval'), (2012, 'trainval')])
         val_dataset = gdata.VOCDetection(
@@ -208,7 +221,7 @@ def get_dali_dataloader(net, train_dataset, val_dataset, data_shape, global_batc
 
 
 def save_params(net, best_map, current_map, epoch, save_interval, prefix):
-    current_map = float(current_map)
+    current_map = float(current_map)    
     if current_map > best_map[0]:
         best_map[0] = current_map
         net.save_params('{:s}_best.params'.format(prefix, epoch, current_map))
@@ -352,11 +365,13 @@ def train(net, train_data, val_data, eval_metric, ctx, args):
                 val_msg = '\n'.join(['{}={}'.format(k, v) for k, v in zip(map_name, mean_ap)])
                 logger.info('[Epoch {}] Validation: \n{}'.format(epoch, val_msg))
                 current_map = float(mean_ap[-1])
+                update_epoch(epoch, 0.0, current_map)
             else:
                 current_map = 0.
             save_params(net, best_map, current_map, epoch, args.save_interval, args.save_prefix)
 
 if __name__ == '__main__':
+    update_start()
     args = parse_args()
 
     if args.amp:
@@ -415,3 +430,4 @@ if __name__ == '__main__':
 
     # training
     train(net, train_data, val_data, eval_metric, ctx, args)
+    update_working(2)
