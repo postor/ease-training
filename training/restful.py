@@ -5,7 +5,6 @@ import time
 RESTFUL_ENDPOINT = os.getenv('RESTFUL_ENDPOINT')
 TRAIN_ID = int(os.getenv('TRAIN_ID'))
 
-os.system('./prepare.sh')
 
 def update_working(working_status):
     cmd = 'curl -d \'{"id":%d, "working":%d}\' -H "Content-Type: application/json" -X PUT %s/train' % (
