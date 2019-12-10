@@ -127,7 +127,7 @@ def parse_args():
             raise SystemExit("Horovod not found, please check if you installed it correctly.")
         hvd.init()
 
-    if args.dataset == 'voc':
+    if args.dataset == 'voc' or args.dataset == 'custom':
         args.epochs = int(args.epochs) if args.epochs else 20
         args.lr_decay_epoch = args.lr_decay_epoch if args.lr_decay_epoch else '14,20'
         args.lr = float(args.lr) if args.lr else 0.001

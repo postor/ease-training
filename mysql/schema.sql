@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2019-12-09 07:37:51
+-- Generation Time: 2019-12-10 10:44:16
 -- 服务器版本： 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -71,7 +71,14 @@ CREATE TABLE `model` (
 INSERT INTO `model` (`id`, `name`, `docker_cmd`) VALUES
 (1, 'yolo3_darknet53_custom', 'train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=darknet53'),
 (2, 'yolo3_mobilenet0.25_custom', 'train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=mobilenet0.25'),
-(3, 'yolo3_mobilenet1.0_custom', 'train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=mobilenet1.0');
+(3, 'yolo3_mobilenet1.0_custom', 'train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=mobilenet1.0'),
+(4, 'faster_rcnn_resnet101_v1d_custom', 'train_faster_rcnn.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=resnet101_v1d'),
+(5, 'faster_rcnn_resnet50_v1b_custom', 'train_faster_rcnn.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=resnet50_v1b'),
+(6, 'ssd_300_mobilenet0.25_custom', 'train_ssd.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=mobilenet0.25  --data-shape=300'),
+(7, 'ssd_300_vgg16_atrous_custom', 'train_ssd.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=vgg16_atrous  --data-shape=300'),
+(8, 'ssd_512_mobilenet1.0_custom', 'train_ssd.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=mobilenet1.0  --data-shape=512'),
+(9, 'ssd_512_resnet50_v1_custom', 'train_ssd.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=resnet50_v1  --data-shape=512'),
+(10, 'ssd_512_vgg16_atrous_custom', 'train_ssd.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=vgg16_atrous  --data-shape=512');
 
 -- --------------------------------------------------------
 
@@ -137,7 +144,7 @@ ALTER TABLE `epoch`
 -- 使用表AUTO_INCREMENT `model`
 --
 ALTER TABLE `model`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号', AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号', AUTO_INCREMENT=11;
 
 --
 -- 使用表AUTO_INCREMENT `train`
