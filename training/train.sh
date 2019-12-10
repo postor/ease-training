@@ -1,5 +1,5 @@
 #!/bin/bash
 set -x \
   && ./prepare.sh \
-  && echo 'start training ...' \
+  && echo "$@" \
   && python3 "$@"
