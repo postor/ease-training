@@ -4,11 +4,9 @@ import { update as updateDatasets, PREFIX } from '../../store/dataset'
 import { update as updateTrains } from '../../store/train'
 import { update as updateModels } from '../../store/model'
 import TrainList from '../../components/TrainList'
-import ModelCompare from '../../components/ModelCompare'
 
 const View = ({ id, datasets = [] }) => {
   if (!datasets.length) return (<div>not found</div>)
-  console.log(datasets, 'datasets')
   const dataset = datasets.filter(x => x.id == id)[0]
   if (!dataset) {
     return (<div>error!</div>)
@@ -18,7 +16,6 @@ const View = ({ id, datasets = [] }) => {
     <h1>{dataset.name}</h1>
     <div>
       <TrainList datasetId={id} />
-      <ModelCompare datasetId={id} />      
     </div>
   </div>)
 }
@@ -30,7 +27,7 @@ const WrappedView = ({ query: { id } }) => (<ConnectedView id={id} />)
 WrappedView.getInitialProps = async ({ query, store }) => {
   await Promise.all([
     store.dispatch(updateDatasets(false)),
-    store.dispatch(updateModels(false)),    
+    store.dispatch(updateModels(false)),
     store.dispatch(updateTrains(query.id, false)),
   ])
   return { query }

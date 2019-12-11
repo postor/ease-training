@@ -22,7 +22,7 @@ const Trains = ({ trains = [], modelDic = {} }) => {
       </thead>
       <tbody>
         {trains.map(x => (<tr key={x.id}>
-          <td><Link href={`/dataset/view?id=${x.id}`}><a>{modelDic[x.model_id].name}</a></Link></td>
+          <td><Link href={`/epoch/chart?id=${x.id}`}><a>{modelDic[x.model_id].name}</a></Link></td>
           <td>{statusLabels[x.working]}</td>
           <td>{x.m_ap}</td>
         </tr>))}
