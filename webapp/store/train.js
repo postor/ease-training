@@ -6,14 +6,14 @@ export const PREFIX = 'train.list'
 
 const trainModel = getModel('train')
 
-export const update = (dataset_id, force = true) => async (dispatch, getState) => {
+export const update = (datasetId, force = true) => async (dispatch, getState) => {
   let prefix = `${PREFIX}.${datasetId}`
   if (!force && getPath(getState(), prefix)) {
     return
   }
   const list = (await trainModel.read({
     params: {
-      dataset_id,
+      dataset_id: datasetId,
     }
   })).data
   dispatch({

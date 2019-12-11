@@ -6,7 +6,7 @@ var express = require('express')
 var router = express.Router()
 var Model = require('../models/train').Model
 var parseQuery = require('../utils').parseQuery
-var counter = require('../utils').counter
+var knex = require('../bookshelf').knex
 var bodyParser = require('body-parser')
 
 router.use(bodyParser.json())
@@ -18,7 +18,9 @@ router.get('/', (req, res, next) => {
     .then((count) => {
       count = count[0]
       totalCount = count[Object.keys(count)[0]]
-      return getQuery(parsed).offset(parsed.offset).limit(parsed.limit).select()
+      return getQueryWithMAP(parsed)
+        .offset(parsed.offset)
+        .limit(parsed.limit)
     })
     .then((result) => {
       res.set('X-Total-Count', totalCount)
@@ -26,11 +28,25 @@ router.get('/', (req, res, next) => {
       res.json(result)
 
     }, (err) => {
+      console.log(err)
       res.status(500).send(err.message || err)
     })
 
   function getQuery(parsed) {
     var query = Model.query()
+    query.where(parsed.where)
+    if (parsed.sort.column && parsed.sort.column) {
+      query = query.orderBy(parsed.sort.column, parsed.sort.direction)
+    }
+    return query
+  }
+
+  function getQueryWithMAP(parsed) {
+    var query = knex('train')
+      .debug(true)
+      .select(knex.raw('train.*, MAX(m_ap) as m_ap'))
+      .leftJoin('epoch', 'train.id', 'epoch.job_id')
+      .groupBy('train.id')
     query.where(parsed.where)
     if (parsed.sort.column && parsed.sort.column) {
       query = query.orderBy(parsed.sort.column, parsed.sort.direction)

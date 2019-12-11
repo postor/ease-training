@@ -2,6 +2,7 @@ import layout from '../../components/layout'
 import connect from '../../store/connect-path'
 import { update as updateDatasets, PREFIX } from '../../store/dataset'
 import { update as updateTrains } from '../../store/train'
+import { update as updateModels } from '../../store/model'
 import TrainList from '../../components/TrainList'
 
 const View = ({ id, datasets = [] }) => {
@@ -28,6 +29,7 @@ const WrappedView = ({ query: { id } }) => (<ConnectedView id={id} />)
 WrappedView.getInitialProps = async ({ query, store }) => {
   await Promise.all([
     store.dispatch(updateDatasets(false)),
+    store.dispatch(updateModels(false)),    
     store.dispatch(updateTrains(query.id, false)),
   ])
   return { query }
