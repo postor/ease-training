@@ -11,7 +11,7 @@ I want to train my custom data and compare performance among different models, s
 - [ ] load voc like dataset from zip
 - [ ] train with SSD / Faster-RCNN / YOLOv3
 - [ ] generate test code for image / video
-- [ ] realtime loss chart
+- [ ] realtime mAP chart
 - [ ] model zoo chart
 - [ ] dataset builder
 

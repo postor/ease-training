@@ -20,8 +20,8 @@ def update_start():
     os.system(cmd)
 
 
-def update_epoch(epoch_num, loss, m_ap):
-    cmd = 'curl -d \'{"job_id":%d, "created_at":%d, "epoch_num":%d, "loss":%f, "m_ap":%f}\' -H "Content-Type: application/json" -X POST %s/epoch' % (
-        TRAIN_ID, int(time.time()), epoch_num, loss, m_ap, RESTFUL_ENDPOINT)
+def update_epoch(epoch_num, val_avg_time, m_ap):
+    cmd = 'curl -d \'{"job_id":%d, "created_at":%d, "epoch_num":%d, "val_avg_time":%f, "m_ap":%f}\' -H "Content-Type: application/json" -X POST %s/epoch' % (
+        TRAIN_ID, int(time.time()), epoch_num, val_avg_time, m_ap, RESTFUL_ENDPOINT)
     print(cmd)
     os.system(cmd)

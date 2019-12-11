@@ -58,7 +58,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         var otherFields = [            
             nga.field('job_id').label('job_id'),            
             nga.field('epoch_num').label('epoch编号'),            
-            nga.field('loss').label('loss'),            
+            nga.field('val_avg_time').label('val_avg_time'),            
             nga.field('m_ap').label('meanAP'),            
             nga.field('created_at').label('创建时间戳'),
         ];

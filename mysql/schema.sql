@@ -47,7 +47,7 @@ CREATE TABLE `epoch` (
   `id` int(11) NOT NULL COMMENT '编号',
   `job_id` int(11) NOT NULL DEFAULT '0',
   `epoch_num` int(11) NOT NULL DEFAULT '0' COMMENT 'epoch编号',
-  `loss` float NOT NULL DEFAULT '0' COMMENT 'loss',
+  `val_avg_time` float NOT NULL DEFAULT '0' COMMENT '平均验证时间',
   `m_ap` float NOT NULL DEFAULT '0' COMMENT 'meanAP',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间戳'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
