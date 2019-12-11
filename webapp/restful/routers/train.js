@@ -43,7 +43,6 @@ router.get('/', (req, res, next) => {
 
   function getQueryWithMAP(parsed) {
     var query = knex('train')
-      .debug(true)
       .select(knex.raw('train.*, MAX(m_ap) as m_ap'))
       .leftJoin('epoch', 'train.id', 'epoch.job_id')
       .groupBy('train.id')
