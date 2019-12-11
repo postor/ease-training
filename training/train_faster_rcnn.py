@@ -474,7 +474,7 @@ def train(net, train_data, val_data, eval_metric, batch_size, ctx, args):
                 epoch, (time.time() - tic), msg))
             if not (epoch + 1) % args.val_interval:
                 # consider reduce the frequency of validation to save time
-                valtic = time()
+                #valtic = time()
                 map_name, mean_ap = validate(
                     net, val_data, ctx, eval_metric, args)
                 val_msg = '\n'.join(['{}={}'.format(k, v)
@@ -482,8 +482,8 @@ def train(net, train_data, val_data, eval_metric, batch_size, ctx, args):
                 logger.info(
                     '[Epoch {}] Validation: \n{}'.format(epoch, val_msg))
                 current_map = float(mean_ap[-1])
-                val_avg_time = (time.time() - valtic)/len(val_data.dataset)
-                update_epoch(epoch, val_avg_time, current_map)
+                #val_avg_time = (time.time() - valtic)/len(val_data.dataset)
+                update_epoch(epoch, 0.0, current_map)
             else:
                 current_map = 0.
             save_params(net, logger, best_map, current_map, epoch, args.save_interval,

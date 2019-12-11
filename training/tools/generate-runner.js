@@ -70,7 +70,7 @@ async function getJob(workingState) {
       _perPage: 1,
       working: workingState
     }
-  })).data || []
+  })).data
 }
 
 function waitMiliseconds(miliseconds) {
