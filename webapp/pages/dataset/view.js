@@ -4,6 +4,7 @@ import { update as updateDatasets, PREFIX } from '../../store/dataset'
 import { update as updateTrains } from '../../store/train'
 import { update as updateModels } from '../../store/model'
 import TrainList from '../../components/TrainList'
+import ModelCompare from '../../components/ModelCompare'
 
 const View = ({ id, datasets = [] }) => {
   if (!datasets.length) return (<div>not found</div>)
@@ -15,10 +16,10 @@ const View = ({ id, datasets = [] }) => {
 
   return (<div>
     <h1>{dataset.name}</h1>
-    <p>
+    <div>
       <TrainList datasetId={id} />
-      {JSON.stringify(dataset)}
-    </p>
+      <ModelCompare datasetId={id} />      
+    </div>
   </div>)
 }
 
