@@ -30,7 +30,7 @@ const Dataset = getModel('dataset')
     const train = todoList[0]
     console.log(`Job found, ${JSON.stringify(train)}`)
     train.working = WORKING_STATE_WORKING
-    await Train.update({ data: train, params: { id: train.id } })
+    await Train.update({ data: { working: WORKING_STATE_WORKING }, params: { id: train.id } })
     console.log(`Job updated, ${JSON.stringify(train)}`)
     const model = (await Model.readOne({ params: { id: train.model_id } })).data
     const dataset = (await Dataset.readOne({ params: { id: train.dataset_id } })).data
