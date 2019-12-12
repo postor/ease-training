@@ -69,16 +69,16 @@ CREATE TABLE `model` (
 --
 
 INSERT INTO `model` (`id`, `name`, `docker_cmd`) VALUES
-(1, 'yolo3_darknet53_custom', 'train_yolo3.py --gpus=1,2 --network=darknet53'),
-(2, 'yolo3_mobilenet0.25_custom', 'train_yolo3.py --gpus=1,2 --network=mobilenet0.25'),
-(3, 'yolo3_mobilenet1.0_custom', 'train_yolo3.py --gpus=1,2 --network=mobilenet1.0'),
-(4, 'faster_rcnn_resnet101_v1d_custom', 'train_faster_rcnn.py --gpus=1,2 --network=resnet101_v1d'),
-(5, 'faster_rcnn_resnet50_v1b_custom', 'train_faster_rcnn.py --gpus=1,2 --network=resnet50_v1b'),
-(6, 'ssd_300_mobilenet0.25_custom', 'train_ssd.py --gpus=1,2 --network=mobilenet0.25  --data-shape=300'),
-(7, 'ssd_300_vgg16_atrous_custom', 'train_ssd.py --gpus=1,2 --network=vgg16_atrous  --data-shape=300'),
-(8, 'ssd_512_mobilenet1.0_custom', 'train_ssd.py --gpus=1,2 --network=mobilenet1.0  --data-shape=512'),
-(9, 'ssd_512_resnet50_v1_custom', 'train_ssd.py --gpus=1,2 --network=resnet50_v1  --data-shape=512'),
-(10, 'ssd_512_vgg16_atrous_custom', 'train_ssd.py --gpus=1,2 --network=vgg16_atrous  --data-shape=512');
+(1, 'yolo3_darknet53_custom', 'train_yolo3.py --network=darknet53'),
+(2, 'yolo3_mobilenet0.25_custom', 'train_yolo3.py --network=mobilenet0.25'),
+(3, 'yolo3_mobilenet1.0_custom', 'train_yolo3.py --network=mobilenet1.0'),
+(4, 'faster_rcnn_resnet101_v1d_custom', 'train_faster_rcnn.py --network=resnet101_v1d'),
+(5, 'faster_rcnn_resnet50_v1b_custom', 'train_faster_rcnn.py --network=resnet50_v1b'),
+(6, 'ssd_300_mobilenet0.25_custom', 'train_ssd.py --network=mobilenet0.25  --data-shape=300'),
+(7, 'ssd_300_vgg16_atrous_custom', 'train_ssd.py --network=vgg16_atrous  --data-shape=300'),
+(8, 'ssd_512_mobilenet1.0_custom', 'train_ssd.py --network=mobilenet1.0  --data-shape=512'),
+(9, 'ssd_512_resnet50_v1_custom', 'train_ssd.py --network=resnet50_v1  --data-shape=512'),
+(10, 'ssd_512_vgg16_atrous_custom', 'train_ssd.py --network=vgg16_atrous  --data-shape=512');
 
 -- --------------------------------------------------------
 

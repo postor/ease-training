@@ -45,11 +45,17 @@ const Dataset = getModel('dataset')
       `-v ${process.env.SHARED_FILES}/.mxnet:/root/.mxnet`,
       `-v ${process.env.SHARED_FILES}:/shared-files`,
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
-      `--shm-size ${process.env.SHM_SIZE}G`,
+      `--shm-size ${process.env.SHM_SIZE}`,
       `--entrypoint ${currentFile}`,
-      `--network=ease-training`
+      `--network ease-training`
     ]
-    const cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}/`
+    let cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}/`
+    if(!cmd.includes('--batch-size')&&process.env.DEFAULT_BATCH_SIZE){
+      cmd+=` --batch-size=${process.env.DEFAULT_BATCH_SIZE}`
+    }
+    if(!cmd.includes('--gpus')&&process.env.DEFAULT_GPUS){
+      cmd+=` --gpus=${process.env.DEFAULT_GPUS}`
+    }
 
     fs.writeFileSync(currentFile,
       `#!/bin/bash

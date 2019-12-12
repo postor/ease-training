@@ -22,7 +22,13 @@ I want to train my custom data and compare performance among different models, s
 ## useage
 
 ```
+./prepare.sh
 docker-compose up -d
 ```
 
-then open http://localhost:3000
+then open http://localhost:3000 (or replace localhost with lan IP)
+
+![home](./screenshots/home.jpg)
+![create dataset](./screenshots/create-dataset.jpg)
+![training](./screenshots/training.jpg)
+![epoch chart](./screenshots/epoch-chart.jpg)

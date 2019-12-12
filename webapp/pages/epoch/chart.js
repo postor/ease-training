@@ -1,7 +1,5 @@
+import Link from 'next/link'
 import layout from '../../components/layout'
-import connect from '../../store/connect-path'
-import { update as updateDatasets, PREFIX as datasetPrefix } from '../../store/dataset'
-import { update as updateModels, PREFIX as modelPrefix } from '../../store/model'
 import EpocheChart from '../../components/EpocheChart'
 import getModel from '../../store/get-model'
 
@@ -10,7 +8,7 @@ const View = ({ train, model, dataset, epochs }) => {
   if (!(train && model && dataset)) return (<div>not found</div>)
 
   return (<div>
-    <h1>{dataset.name}/{model.name}</h1>
+    <h1><Link href={`/dataset/view?id=${dataset.id}`}><a>{dataset.name}</a></Link>/{model.name}</h1>
     <div>
       <EpocheChart epochs={epochs} />
     </div>
@@ -27,7 +25,7 @@ View.getInitialProps = async ({ query: { id } }) => {
     const epochs = (await getModel('epoch').read({ params: { job_id: id } })).data
 
     return { train, model, dataset, epochs }
-  }catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
