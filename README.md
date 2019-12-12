@@ -21,10 +21,10 @@ docker-compose up -d
 
 then open http://localhost:3000 (or replace localhost with lan IP) | 打开 http://localhost:3000 或 localhost 更换为局域网 IP
 
-![home](./screenshots/home.jpg)
-![create dataset](./screenshots/create-dataset.jpg)
-![training](./screenshots/training.jpg)
-![epoch chart](./screenshots/epoch-chart.jpg)
+> ![home](./screenshots/home.jpg)
+> ![create dataset](./screenshots/create-dataset.jpg)
+> ![training](./screenshots/training.jpg)
+> ![epoch chart](./screenshots/epoch-chart.jpg)
 
 ## use docker only | 只使用 docker
 
