@@ -44,19 +44,19 @@ docker run -it --rm --gpus all --shm-size=32G -v $(pwd)/parameters:/parameters -
 docker run -it --rm --gpus all --shm-size=32G -v ~/.mxnet:/root/.mxnet -v $(pwd)/parameters:/parameters -v $(pwd)/dataset.zip:/dataset.zip -v $(pwd):/out-classes --shm-size 32G postor/ease-training train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=darknet53 --save-prefix=/parameters/'
 ```
 
-params refer https://gluon-cv.mxnet.io/build/examples_detection/index.html or [training/predict_yolo3.py](./training/predict.py)
+params or logics refer https://gluon-cv.mxnet.io/build/examples_detection/index.html or [training/predict.py](./training/predict.py)
 
 after running, parameters shall be in your `$(pwd)/parameters` folder
 
 to predict, you need some sample images, put them into a folder, like `$(pwd)/test`, run this to generate result to `$(pwd)/result`
 
 ```
-docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result -v  --entrypoint python3 postor/ease-training predict_yolo3.py --input-folder=/test --output-folder=/result
+docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result postor/ease-training --model=yolo3_darknet53_custom --data-shape=416 --input-folder=/test --output-folder=/result
 ```
 
 then results shall appear in `$(pwd)/result` folder
 
-### supported
+## supported network && data shape
 
 * yolo3
     * darknet53
