@@ -7,3 +7,7 @@ RUN set -x \
   && npm install
 
 COPY . .
+
+
+ENTRYPOINT ["/training/train.sh"]
+CMD ["-c","print('check https://github.com/postor/ease-training for usage')"]

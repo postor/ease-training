@@ -35,25 +35,49 @@ then open http://localhost:3000 (or replace localhost with lan IP)
 
 ## use docker only
 
-prepare your custom dataset and map to `/dataset.zip` and map out where you generate parameters:
+prepare your custom dataset and map to `/dataset.zip` and map out where you generate `classes.py` and parameters:
 
 ```
-docker run -it --rm --gpus all  -v $(pwd)/parameters:/parameters -v $(pwd)/dataset.zip:/dataset.zip postor/ease-training train_yolo3.py --gpus=0 --save-prefix=/parameters/
+docker run -it --rm --gpus all --shm-size=32G -v $(pwd)/parameters:/parameters -v $(pwd)/dataset.zip:/dataset.zip -v $(pwd):/out-classes postor/ease-training train_yolo3.py --gpus=0 --save-prefix=/parameters/
 
 # or cache models and train with more params
-docker run -it --rm --gpus all -v ~/.mxnet:/root/.mxnet -v $(pwd)/parameters:/parameters -v $(pwd)/dataset.zip:/dataset.zip --shm-size 32G postor/ease-training train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=darknet53 --save-prefix=/parameters/'
+docker run -it --rm --gpus all --shm-size=32G -v ~/.mxnet:/root/.mxnet -v $(pwd)/parameters:/parameters -v $(pwd)/dataset.zip:/dataset.zip -v $(pwd):/out-classes --shm-size 32G postor/ease-training train_yolo3.py --batch-size=2 --gpus=1,2 --lr=0.0001 --epochs=500 --network=darknet53 --save-prefix=/parameters/'
 ```
 
-params refer https://gluon-cv.mxnet.io/build/examples_detection/index.html or [training/predict_yolo3.py](./training/predict_yolo3.py) (change path yourself if not `yolo3`)
+params refer https://gluon-cv.mxnet.io/build/examples_detection/index.html or [training/predict_yolo3.py](./training/predict.py)
 
 after running, parameters shall be in your `$(pwd)/parameters` folder
 
 to predict, you need some sample images, put them into a folder, like `$(pwd)/test`, run this to generate result to `$(pwd)/result`
 
 ```
-docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result --entrypoint python3 postor/ease-training predict_yolo3.py --input-folder=/test --output-folder=/result
+docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result -v  --entrypoint python3 postor/ease-training predict_yolo3.py --input-folder=/test --output-folder=/result
 ```
 
 then results shall appear in `$(pwd)/result` folder
 
-change `yolo3` to `ssd` if you like, `faster_rcnn` is not available yet
+### supported
+
+* yolo3
+    * darknet53
+        * 320
+        * 416
+        * 608
+    * mobilenet0.25
+        * 320
+        * 416
+        * 608
+    * mobilenet1.0
+        * 320
+        * 416
+        * 608
+* ssd
+    * mobilenet0.25
+        * 300
+    * vgg16_atrous
+        * 300
+        * 512
+    * mobilenet1.0
+        * 512
+    * resnet50_v1
+        * 512

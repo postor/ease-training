@@ -17,4 +17,5 @@ RUN set -x \
 
 COPY . .
 
-ENTRYPOINT ./train.sh
+ENTRYPOINT ["/training/train.sh"]
+CMD ["-c","print('check https://github.com/postor/ease-training for usage')"]

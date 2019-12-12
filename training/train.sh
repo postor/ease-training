@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x \
   && ./prepare.sh \
-  && echo "$@" \
+  && mkdir -p /out-classes
+  && cp classes.py /out-classes \
   && python3 "$@"
