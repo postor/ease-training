@@ -3,7 +3,7 @@ import time
 
 
 RESTFUL_ENDPOINT = os.getenv('RESTFUL_ENDPOINT')
-TRAIN_ID = int(os.getenv('TRAIN_ID'))
+TRAIN_ID = 0 if not os.getenv('TRAIN_ID') else int(os.getenv('TRAIN_ID'))
 
 
 def update_working(working_status):
