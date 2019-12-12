@@ -1,6 +1,6 @@
 # ease training
 
-prepare a dataset and you are ready to train | 只要准备好训练数据集，就可以开始训练了
+prepare a dataset and you are ready to train, zero coding | 只要准备好训练数据集，就可以开始训练了，无需编码
 
 ## requirements | 需求
 
