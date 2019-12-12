@@ -1,0 +1,9 @@
+FROM postor/ease-training
+
+WORKDIR /training
+
+RUN set -x \
+  && pip3 install opencv-python --no-cache-dir 
+
+ENTRYPOINT ["python3","predict.py"]
+CMD [""]

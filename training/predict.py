@@ -45,8 +45,8 @@ if __name__ == '__main__':
         box_ids, scores, bboxes = net(x)
         ax = utils.viz.cv_plot_bbox(
             orig_img, bboxes[0], scores[0], box_ids[0], class_names=net.classes, thresh=args.thresh)
-        cv2.imshow('image', orig_img[..., ::-1])
-        cv2.waitKey(1)
+        # cv2.imshow('image', orig_img[..., ::-1])
+        # cv2.waitKey(1)
         cv2.imwrite(os.path.join(args.output_folder, filename.split(
             '.')[0] + '_result.jpg'), orig_img[..., ::-1])
 
