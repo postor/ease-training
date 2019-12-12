@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     net = gcv.model_zoo.get_model(
         args.model, classes=classesNames, pretrained_base=False)
-    net.load_parameters('parameters/%s_best.params' % (args.model))
+    net.load_parameters('parameters/%s_custom_best.params' % (args.model))
 
     dirName = args.input_folder
     directory = os.fsencode(dirName)
