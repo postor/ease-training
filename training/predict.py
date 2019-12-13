@@ -23,15 +23,16 @@ def parse_args():
                         help="input folder, with images inside")
     parser.add_argument('--output-folder', type=str, default='result',
                         help="output folder, result will generate to")
-    
+
     args = parser.parse_args()
     return args
+
 
 if __name__ == '__main__':
     args = parse_args()
 
     net = gcv.model_zoo.get_model(
-        args.model, classes=classesNames, pretrained_base=False)
+        '%s_custom' % (args.model), classes=classesNames, pretrained_base=False)
     net.load_parameters('parameters/%s_custom_best.params' % (args.model))
 
     dirName = args.input_folder
@@ -41,7 +42,8 @@ if __name__ == '__main__':
         filename = os.fsdecode(file)
         frame = os.path.join(dirName, filename)
         print(frame)
-        x, orig_img = gcv.data.transforms.presets.ssd.load_test(frame, args.data_shape)
+        x, orig_img = gcv.data.transforms.presets.ssd.load_test(
+            frame, args.data_shape)
         box_ids, scores, bboxes = net(x)
         ax = utils.viz.cv_plot_bbox(
             orig_img, bboxes[0], scores[0], box_ids[0], class_names=net.classes, thresh=args.thresh)
