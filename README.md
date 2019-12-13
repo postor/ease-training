@@ -45,7 +45,7 @@ after training, parameters shall be in your `$(pwd)/parameters` folder | 训练�
 to predict, you need some sample images, put them into a folder, like `$(pwd)/test`, run this to generate result to `$(pwd)/result` | 要进行预测，你需要准备些样例图片，放到一个文件夹里，比如 `$(pwd)/test`，运行以命令码将预测结果生成到 `$(pwd)/result`
 
 ```
-docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result postor/ease-training --model=yolo3_darknet53 --data-shape=416 --input-folder=/test --output-folder=/result
+docker run -it --rm --gpus all  -v $(pwd)/parameters:/training/parameters -v $(pwd)/test:/test -v $(pwd)/result:/result -v $(pwd)/classes.py:/training/classes.py postor/ease-training:predict --model=yolo3_darknet53 --data-shape=416 --input-folder=/test --output-folder=/result
 ```
 
 replace `--model=yolo3_darknet53 --data-shape=416` with `--model=${detector}_${network} --data-shape=${dataShape}` if needed
