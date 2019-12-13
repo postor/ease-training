@@ -22,7 +22,7 @@ View.getInitialProps = async ({ query: { id } }) => {
     const train = (await getModel('train').readOne({ params: { id } })).data
     const model = (await getModel('model').readOne({ params: { id: train.model_id } })).data
     const dataset = (await getModel('dataset').readOne({ params: { id: train.dataset_id } })).data
-    const epochs = (await getModel('epoch').read({ params: { job_id: id } })).data
+    const epochs = (await getModel('epoch').read({ params: { job_id: id, _perPage: Number.MAX_SAFE_INTEGER } })).data
 
     return { train, model, dataset, epochs }
   } catch (e) {

@@ -48,7 +48,7 @@ def parse_args():
                         help="Base network name which serves as feature extraction base.")
     parser.add_argument('--data-shape', type=int, default=300,
                         help="Input data shape, use 300, 512.")
-    parser.add_argument('--batch-size', type=int, default=32,
+    parser.add_argument('--batch-size', type=int, default=1,
                         help='Training mini-batch size')
     parser.add_argument('--dataset', type=str, default='custom',
                         help='Training dataset. Now support voc.')

@@ -50,12 +50,6 @@ const Dataset = getModel('dataset')
       `--network ease-training`
     ]
     let cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}/`
-    if(!cmd.includes('--batch-size')&&process.env.DEFAULT_BATCH_SIZE){
-      cmd+=` --batch-size=${process.env.DEFAULT_BATCH_SIZE}`
-    }
-    if(!cmd.includes('--gpus')&&process.env.DEFAULT_GPUS){
-      cmd+=` --gpus=${process.env.DEFAULT_GPUS}`
-    }
 
     fs.writeFileSync(currentFile,
       `#!/bin/bash

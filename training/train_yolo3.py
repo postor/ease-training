@@ -34,7 +34,7 @@ def parse_args():
     parser.add_argument('--data-shape', type=int, default=416,
                         help="Input data shape for evaluation, use 320, 416, 608... " +
                              "Training is with random shapes from (320 to 608).")
-    parser.add_argument('--batch-size', type=int, default=64,
+    parser.add_argument('--batch-size', type=int, default=1,
                         help='Training mini-batch size')
     parser.add_argument('--dataset', type=str, default='custom',
                         help='Training dataset. Now support voc.')
