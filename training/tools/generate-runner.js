@@ -43,9 +43,8 @@ const Dataset = getModel('dataset')
       `--env TRAIN_ID=${train.id}`,
       `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
       `-v ${process.env.SHARED_FILES}/.mxnet:/root/.mxnet`,
-      `-v ${process.env.SHARED_FILES}:/shared-files`,    
+      `-v ${process.env.SHARED_FILES}:/shared-files`,
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
-      `-v ${process.env.SHARED_FILES}/classes/${dataset.name}/${model.name}:/out-classes`,  
       `--shm-size ${process.env.SHM_SIZE}`,
       `--entrypoint ${currentFile}`,
       `--network ease-training`
@@ -54,7 +53,10 @@ const Dataset = getModel('dataset')
 
     fs.writeFileSync(currentFile,
       `#!/bin/bash
-      set -x && ./prepare.sh && python3 ${cmd}`)
+      set -x && ./prepare.sh \\
+      && mkdir -p /shared-files/params/${dataset.name}/${model.name}/ \\ 
+      && cp classes.py /shared-files/params/${dataset.name}/${model.name}/ \\ 
+      && python3 ${cmd}`)
     fs.chmodSync(currentFile, 0o765)
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
       `#!/bin/bash
