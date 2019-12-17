@@ -51,12 +51,16 @@ const Dataset = getModel('dataset')
     ]
     let cmd = `${model.docker_cmd} --save-prefix=/shared-files/params/${dataset.name}/${model.name}/`
 
+    let bashLines = [
+      `set -x`,
+      `./prepare.sh`,
+      `mkdir -p /shared-files/params/${dataset.name}/${model.name}/`,
+      `cp classes.py /shared-files/params/${dataset.name}/${model.name}/`,
+      `python3 ${cmd}`
+    ]
     fs.writeFileSync(currentFile,
       `#!/bin/bash
-      set -x && ./prepare.sh \\
-      && mkdir -p /shared-files/params/${dataset.name}/${model.name}/ \\ 
-      && cp classes.py /shared-files/params/${dataset.name}/${model.name}/ \\ 
-      && python3 ${cmd}`)
+      ${bashLines.join(' && ')}`)
     fs.chmodSync(currentFile, 0o765)
     fs.writeFileSync(join(__dirname, 'tmp.sh'),
       `#!/bin/bash
