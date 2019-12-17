@@ -2,6 +2,8 @@
 
 prepare a dataset and you are ready to train, zero coding | 只要准备好训练数据集，就可以开始训练了，无需编码
 
+[![](https://img.youtube.com/vi/SdBoGe_laxo/0.jpg)](https://youtu.be/SdBoGe_laxo)
+
 ## requirements | 需求
 
 - linux
