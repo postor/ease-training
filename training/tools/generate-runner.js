@@ -43,8 +43,9 @@ const Dataset = getModel('dataset')
       `--env TRAIN_ID=${train.id}`,
       `--env RESTFUL_ENDPOINT=${process.env.RESTFUL_ENDPOINT}`,
       `-v ${process.env.SHARED_FILES}/.mxnet:/root/.mxnet`,
-      `-v ${process.env.SHARED_FILES}:/shared-files`,
+      `-v ${process.env.SHARED_FILES}:/shared-files`,    
       `-v ${process.env.SHARED_FILES}/datasets/${dataset.name}:/dataset.zip`,
+      `-v ${process.env.SHARED_FILES}/classes/${dataset.name}/${model.name}:/out-classes`,  
       `--shm-size ${process.env.SHM_SIZE}`,
       `--entrypoint ${currentFile}`,
       `--network ease-training`
