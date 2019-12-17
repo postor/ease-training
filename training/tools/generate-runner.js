@@ -25,7 +25,7 @@ const Dataset = getModel('dataset')
     while (!todoList.length) {
       console.log(`No job to do, wait for ${IDLE_WAITING} miliseconds ...`)
       await waitMiliseconds(IDLE_WAITING)
-      todoList = await getJob(1)
+      todoList = await getJob(WORKING_STATE_NOT_STARTED)
     }
     const train = todoList[0]
     console.log(`Job found, ${JSON.stringify(train)}`)
